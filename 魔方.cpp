@@ -1,45 +1,41 @@
  
-/*
-Ä§·½³ÌĞò
-by czw
-on June 28th 
- */ 
+
 #include<stdio.h>
 #include<stdlib.h>
 #include<string.h>
 #include<conio.h>
 
-//Êı¾İ½á¹¹£º
+//æ•°æ®ç»“æ„ï¼š
 typedef enum colors
-{blue=1,red,yellow,green,white,orange}Colors;    //Ä§·½µÄÁùÖÖÑÕÉ« 
+{blue=1,red,yellow,green,white,orange}Colors;    //é­”æ–¹çš„å…­ç§é¢œè‰² 
 
 typedef struct surface
 {
 	Colors s[4][4];
-}Surface;  //Ã¿¸öÃæÓĞ3*3¸öĞ¡¸ñ
+}Surface;  //æ¯ä¸ªé¢æœ‰3*3ä¸ªå°æ ¼
 
 typedef struct cube
 {
 	Surface up,down,front,back,left,right;
-}Cube;    //Ä§·½µÄ6¸öÃæ
+}Cube;    //é­”æ–¹çš„6ä¸ªé¢
 
 typedef struct snode
 {
 	char *chbuf;
 	int times;
 	struct snode *next;
-}SNode;   // Á´Õ» 
+}SNode;   // é“¾æ ˆ 
 
 typedef struct sequence
 {
-	SNode *head;//´æ´¢Ä§·½×ª»»ĞòÁĞ
-	int num;//Ä§·½×ª»»µÄ´ÎÊı
-}Sequence;   //ÊıÁĞ 
+	SNode *head;//å­˜å‚¨é­”æ–¹è½¬æ¢åºåˆ—
+	int num;//é­”æ–¹è½¬æ¢çš„æ¬¡æ•°
+}Sequence;   //æ•°åˆ— 
 
 Sequence CD;
 
-//Ö÷³ÌĞò£º
-void SaveChBuf(char *sur,int i)//½«cbĞòÁĞ´æÈëchbufÖĞ
+//ä¸»ç¨‹åºï¼š
+void SaveChBuf(char *sur,int i)//å°†cbåºåˆ—å­˜å…¥chbufä¸­
 {
 	char *str;
 	int len=strlen(sur);
@@ -49,14 +45,14 @@ void SaveChBuf(char *sur,int i)//½«cbĞòÁĞ´æÈëchbufÖĞ
 		str=(char *)malloc(sizeof(char)*(len+2));
 		if(!str)
 		{
-			printf("ÄÚ´æ²»×ã!\n");
+			printf("å†…å­˜ä¸è¶³!\n");
 			exit(0);
 		}
 		strcpy(str,sur);
 		q=(SNode *)malloc(sizeof(SNode));
 		if(!q)
 		{
-			printf("ÄÚ´æ²»×ã!\n");
+			printf("å†…å­˜ä¸è¶³!\n");
 			exit(0);
 		}
 		q->chbuf=str;
@@ -100,7 +96,7 @@ void SaveChBuf(char *sur,int i)//½«cbĞòÁĞ´æÈëchbufÖĞ
 	}
 }
 
-void clockwise(Surface *sur,int i)//½«surÃæË³Ê±ÕëĞı×ªi´Î
+void clockwise(Surface *sur,int i)//å°†suré¢é¡ºæ—¶é’ˆæ—‹è½¬iæ¬¡
 {
 	Surface t;
 	for(;i>0;i--)
@@ -118,7 +114,7 @@ void clockwise(Surface *sur,int i)//½«surÃæË³Ê±ÕëĞı×ªi´Î
 	}
 }
 
-void F(Cube *m,int i)//½«Ä§·½µÄÕıÃæË³Ê±Õë×ªi´Î
+void F(Cube *m,int i)//å°†é­”æ–¹çš„æ­£é¢é¡ºæ—¶é’ˆè½¬iæ¬¡
 {
 	Cube n;
 	for(;i>0;i--)
@@ -140,7 +136,7 @@ void F(Cube *m,int i)//½«Ä§·½µÄÕıÃæË³Ê±Õë×ªi´Î
 	}
 }
 
-void B(Cube *m,int i)//½«Ä§·½µÄ±³ÃæË³Ê±Õë×ªi´Î
+void B(Cube *m,int i)//å°†é­”æ–¹çš„èƒŒé¢é¡ºæ—¶é’ˆè½¬iæ¬¡
 {
 	Cube n;
 	for(;i>0;i--)
@@ -162,7 +158,7 @@ void B(Cube *m,int i)//½«Ä§·½µÄ±³ÃæË³Ê±Õë×ªi´Î
 	}
 }
 
-void R(Cube *m,int i)//½«Ä§·½µÄÓÒÃæË³Ê±Õë×ªi´Î
+void R(Cube *m,int i)//å°†é­”æ–¹çš„å³é¢é¡ºæ—¶é’ˆè½¬iæ¬¡
 {
 	Cube n;
 	for(;i>0;i--)
@@ -184,7 +180,7 @@ void R(Cube *m,int i)//½«Ä§·½µÄÓÒÃæË³Ê±Õë×ªi´Î
 	}
 }
 
-void L(Cube *m,int i)//½«Ä§·½µÄ×óÃæË³Ê±Õë×ªi´Î
+void L(Cube *m,int i)//å°†é­”æ–¹çš„å·¦é¢é¡ºæ—¶é’ˆè½¬iæ¬¡
 {
 	Cube n;
 	for(;i>0;i--)
@@ -206,7 +202,7 @@ void L(Cube *m,int i)//½«Ä§·½µÄ×óÃæË³Ê±Õë×ªi´Î
 	}
 }
 
-void U(Cube *m,int i)//½«Ä§·½µÄÉÏÃæË³Ê±Õë×ªi´Î
+void U(Cube *m,int i)//å°†é­”æ–¹çš„ä¸Šé¢é¡ºæ—¶é’ˆè½¬iæ¬¡
 {
 	Cube n;
 	for(;i>0;i--)
@@ -228,7 +224,7 @@ void U(Cube *m,int i)//½«Ä§·½µÄÉÏÃæË³Ê±Õë×ªi´Î
 	}
 }
 
-void D(Cube *m,int i)//½«Ä§·½µÄµ×ÃæË³Ê±Õë×ªi´Î
+void D(Cube *m,int i)//å°†é­”æ–¹çš„åº•é¢é¡ºæ—¶é’ˆè½¬iæ¬¡
 {
 	Cube n;
 	for(;i>0;i--)
@@ -250,7 +246,7 @@ void D(Cube *m,int i)//½«Ä§·½µÄµ×ÃæË³Ê±Õë×ªi´Î
 	}
 }
 
-void MR(Cube *m,int i)//½«Ä§·½µÄ×óÃæºÍÓÒÃæÖ®¼äµÄÃæÒÔÓÒÃæÎª»ù×¼Ë³Ê±ÕëĞı×ª1´Î
+void MR(Cube *m,int i)//å°†é­”æ–¹çš„å·¦é¢å’Œå³é¢ä¹‹é—´çš„é¢ä»¥å³é¢ä¸ºåŸºå‡†é¡ºæ—¶é’ˆæ—‹è½¬1æ¬¡
 {
 	Cube n;
 	for(;i>0;i--)
@@ -271,7 +267,7 @@ void MR(Cube *m,int i)//½«Ä§·½µÄ×óÃæºÍÓÒÃæÖ®¼äµÄÃæÒÔÓÒÃæÎª»ù×¼Ë³Ê±ÕëĞı×ª1´Î
 	}
 }
 
-void MF(Cube *m,int i)//½«Ä§·½µÄÇ°ÃæºÍºóÃæÖ®¼äµÄÃæÒÔÇ°ÃæÎª»ù×¼Ë³Ê±ÕëĞı×ªi´Î
+void MF(Cube *m,int i)//å°†é­”æ–¹çš„å‰é¢å’Œåé¢ä¹‹é—´çš„é¢ä»¥å‰é¢ä¸ºåŸºå‡†é¡ºæ—¶é’ˆæ—‹è½¬iæ¬¡
 {
 	Cube n;
 	for(;i>0;i--)
@@ -292,7 +288,7 @@ void MF(Cube *m,int i)//½«Ä§·½µÄÇ°ÃæºÍºóÃæÖ®¼äµÄÃæÒÔÇ°ÃæÎª»ù×¼Ë³Ê±ÕëĞı×ªi´Î
 	}
 }
 
-void MU(Cube *m,int i)//½«Ä§·½µÄÉÏÃæºÍµ×ÃæÖ®¼äµÄÃæÒÔÉÏÃæÎª»ù×¼Ë³Ê±ÕëĞı×ªi´Î
+void MU(Cube *m,int i)//å°†é­”æ–¹çš„ä¸Šé¢å’Œåº•é¢ä¹‹é—´çš„é¢ä»¥ä¸Šé¢ä¸ºåŸºå‡†é¡ºæ—¶é’ˆæ—‹è½¬iæ¬¡
 {
 	Cube n;
 	for(;i>0;i--)
@@ -313,27 +309,27 @@ void MU(Cube *m,int i)//½«Ä§·½µÄÉÏÃæºÍµ×ÃæÖ®¼äµÄÃæÒÔÉÏÃæÎª»ù×¼Ë³Ê±ÕëĞı×ªi´Î
 	}
 }
 
-void MoveCube(Cube *m,char *sur,int i)//¸ù¾İĞòÁĞcb×ª»»Ä§·½m
+void MoveCube(Cube *m,char *sur,int i)//æ ¹æ®åºåˆ—cbè½¬æ¢é­”æ–¹m
 {
-	SaveChBuf(sur,i);//½«Ä§·½×ª»»ĞòÁĞ´æÈëchbufÖĞ
+	SaveChBuf(sur,i);//å°†é­”æ–¹è½¬æ¢åºåˆ—å­˜å…¥chbufä¸­
 	if(!strcmp(sur,"f"))
-		F(m,i);//½«Ä§·½µÄÕıÃæË³Ê±ÕëĞı×ªi´Î
+		F(m,i);//å°†é­”æ–¹çš„æ­£é¢é¡ºæ—¶é’ˆæ—‹è½¬iæ¬¡
 	if(!strcmp(sur,"b"))
-		B(m,i);//½«Ä§·½µÄ±³ÃæË³Ê±ÕëĞı×ªi´Î
+		B(m,i);//å°†é­”æ–¹çš„èƒŒé¢é¡ºæ—¶é’ˆæ—‹è½¬iæ¬¡
 	if(!strcmp(sur,"r"))
-		R(m,i);//½«Ä§·½µÄÓÒÃæË³Ê±ÕëĞı×ªi´Î
+		R(m,i);//å°†é­”æ–¹çš„å³é¢é¡ºæ—¶é’ˆæ—‹è½¬iæ¬¡
 	if(!strcmp(sur,"l"))
-		L(m,i);//½«Ä§·½µÄ×óÃæË³Ê±ÕëĞı×ªi´Î
+		L(m,i);//å°†é­”æ–¹çš„å·¦é¢é¡ºæ—¶é’ˆæ—‹è½¬iæ¬¡
 	if(!strcmp(sur,"u"))
-		U(m,i);//½«Ä§·½µÄÉÏÃæË³Ê±ÕëĞı×ªi´Î
+		U(m,i);//å°†é­”æ–¹çš„ä¸Šé¢é¡ºæ—¶é’ˆæ—‹è½¬iæ¬¡
 	if(!strcmp(sur,"d"))
-		D(m,i);//½«Ä§·½µÄµ×ÃæË³Ê±ÕëĞı×ªi´Î
+		D(m,i);//å°†é­”æ–¹çš„åº•é¢é¡ºæ—¶é’ˆæ—‹è½¬iæ¬¡
 	if(!strcmp(sur,"mr"))
-		MR(m,i);//½«Ä§·½µÄ×óÃæºÍÓÒÃæÖ®¼äµÄÃæÒÔÓÒÃæÎª»ù×¼Ë³Ê±ÕëĞı×ªi´Î
+		MR(m,i);//å°†é­”æ–¹çš„å·¦é¢å’Œå³é¢ä¹‹é—´çš„é¢ä»¥å³é¢ä¸ºåŸºå‡†é¡ºæ—¶é’ˆæ—‹è½¬iæ¬¡
 	if(!strcmp(sur,"mf"))
-		MF(m,i);//½«Ä§·½µÄÇ°ÃæºÍºóÃæÖ®¼äµÄÃæÒÔÇ°ÃæÎª»ù×¼Ë³Ê±ÕëĞı×ªi´Î
+		MF(m,i);//å°†é­”æ–¹çš„å‰é¢å’Œåé¢ä¹‹é—´çš„é¢ä»¥å‰é¢ä¸ºåŸºå‡†é¡ºæ—¶é’ˆæ—‹è½¬iæ¬¡
 	if(!strcmp(sur,"mu"))
-		MU(m,i);//½«Ä§·½µÄÉÏÃæºÍµ×ÃæÖ®¼äµÄÃæÒÔÉÏÃæÎª»ù×¼Ë³Ê±ÕëĞı×ªi´Î
+		MU(m,i);//å°†é­”æ–¹çš„ä¸Šé¢å’Œåº•é¢ä¹‹é—´çš„é¢ä»¥ä¸Šé¢ä¸ºåŸºå‡†é¡ºæ—¶é’ˆæ—‹è½¬iæ¬¡
 }
 
 void InputSurface(Surface *sur)
@@ -347,26 +343,26 @@ void InputSurface(Surface *sur)
 		}
 }
 
-void Input(Cube *magiccube)   //ÊäÈëÄ§·½ 
+void Input(Cube *magiccube)   //è¾“å…¥é­”æ–¹ 
 {
 	printf("Input the colors of the Magiccube:\n");
 	printf("Blue--------1\tRed---------2\tYellow------3\n");
 	printf("Green-------4\tWhite-------5\tOrange------6\n\n");
 	printf("Input the colors of Up:\n");
-	InputSurface(&(magiccube->up));   //¶¥Ãæ
+	InputSurface(&(magiccube->up));   //é¡¶é¢
 	printf("Input the colors of Down:\n");
-	InputSurface(&(magiccube->down));   //µ×Ãæ
+	InputSurface(&(magiccube->down));   //åº•é¢
 	printf("Input the colors of Front:\n");
-	InputSurface(&(magiccube->front));   //Ç°Ãæ
+	InputSurface(&(magiccube->front));   //å‰é¢
 	printf("Input the colors of Back:\n");
-	InputSurface(&(magiccube->back));   //ºóÃæ
+	InputSurface(&(magiccube->back));   //åé¢
 	printf("Input the colors of Left:\n");
-	InputSurface(&(magiccube->left));   //×óÃæ
+	InputSurface(&(magiccube->left));   //å·¦é¢
 	printf("Input the colors of Right:\n");
-	InputSurface(&(magiccube->right));   //ÓÒÃæ
+	InputSurface(&(magiccube->right));   //å³é¢
 }
 
-void DownCross(Cube *magiccube)//ÔÚµ×ÃæÆ´³öÒ»¸öÊ®×Ö
+void DownCross(Cube *magiccube)//åœ¨åº•é¢æ‹¼å‡ºä¸€ä¸ªåå­—
 {
 	while(!((magiccube->down.s[1][2]==magiccube->down.s[2][2]&&magiccube->front.s[3][2]==magiccube->front.s[2][2])
 		&&(magiccube->down.s[2][1]==magiccube->down.s[2][2]&&magiccube->left.s[3][2]==magiccube->left.s[2][2])
@@ -386,7 +382,7 @@ void DownCross(Cube *magiccube)//ÔÚµ×ÃæÆ´³öÒ»¸öÊ®×Ö
 			{
 				strcpy(ch,s[i]);
 				MoveCube(magiccube,ch,2);
-			}//µ×ÃæÀâ¿éÎªµ×ÃæÉ«Î»ÖÃ²»¶Ô
+			}//åº•é¢æ£±å—ä¸ºåº•é¢è‰²ä½ç½®ä¸å¯¹
 			if(magiccube->up.s[subscript_of_up[i][0]][subscript_of_up[i][1]]==magiccube->down.s[2][2])
 			{
 				n=0;
@@ -397,8 +393,8 @@ void DownCross(Cube *magiccube)//ÔÚµ×ÃæÆ´³öÒ»¸öÊ®×Ö
 				}
 				strcpy(ch,s[(i+n)%4]);
 				MoveCube(magiccube,ch,2);
-			}//ÒÔÉÏÊÇµ×ÃæÀâ¿éÔÚ¶¥ÃæµÄÇé¿ö
-			if(sur[i]->s[1][2]==magiccube->down.s[2][2])//²àÃæÉÏÀâÊÇµ×ÃæÉ«µÄÇé¿ö
+			}//ä»¥ä¸Šæ˜¯åº•é¢æ£±å—åœ¨é¡¶é¢çš„æƒ…å†µ
+			if(sur[i]->s[1][2]==magiccube->down.s[2][2])//ä¾§é¢ä¸Šæ£±æ˜¯åº•é¢è‰²çš„æƒ…å†µ
 			{
 				n=0;
 				while(sur[(i+n+1)%4]->s[2][2]!=magiccube->up.s[subscript_of_up[(i+n)%4][0]][subscript_of_up[(i+n)%4][1]])
@@ -413,21 +409,21 @@ void DownCross(Cube *magiccube)//ÔÚµ×ÃæÆ´³öÒ»¸öÊ®×Ö
 				strcpy(ch,s[(i+n)%4]);
 				MoveCube(magiccube,ch,1);
 			}
-			if(sur[i]->s[2][1]==magiccube->down.s[2][2])//²àÃæ×óÀâÊÇµ×ÃæÉ«µÄÇé¿ö
+			if(sur[i]->s[2][1]==magiccube->down.s[2][2])//ä¾§é¢å·¦æ£±æ˜¯åº•é¢è‰²çš„æƒ…å†µ
 			{
 				strcpy(ch,s[(i+1)%4]);
 				MoveCube(magiccube,ch,3);
 				MoveCube(magiccube,"u",1);
 				MoveCube(magiccube,ch,1);
 			}
-			if(sur[i]->s[2][3]==magiccube->down.s[2][2])//²àÃæÓÒÀâÊÇµ×ÃæÉ«µÄÇé¿ö
+			if(sur[i]->s[2][3]==magiccube->down.s[2][2])//ä¾§é¢å³æ£±æ˜¯åº•é¢è‰²çš„æƒ…å†µ
 			{
 				strcpy(ch,s[(i+3)%4]);
 				MoveCube(magiccube,ch,1);
 				MoveCube(magiccube,"u",1);
 				MoveCube(magiccube,ch,3);
 			}
-			if(sur[i]->s[3][2]==magiccube->down.s[2][2])//²àÃæµ×ÀâÊÇµ×ÃæÉ«µÄÇé¿ö
+			if(sur[i]->s[3][2]==magiccube->down.s[2][2])//ä¾§é¢åº•æ£±æ˜¯åº•é¢è‰²çš„æƒ…å†µ
 			{
 				strcpy(ch,s[i]);
 				MoveCube(magiccube,ch,1);
@@ -437,17 +433,17 @@ void DownCross(Cube *magiccube)//ÔÚµ×ÃæÆ´³öÒ»¸öÊ®×Ö
 				MoveCube(magiccube,ch,1);
 				strcpy(ch,s[i]);
 				MoveCube(magiccube,ch,3);
-			}//ÒÔÉÏÊÇ²àÃæÀâ¿éÉ«ÊÇµ×ÃæÉ«µÄÇé¿ö
+			}//ä»¥ä¸Šæ˜¯ä¾§é¢æ£±å—è‰²æ˜¯åº•é¢è‰²çš„æƒ…å†µ
 		}
 	}
 }
 
-void DownCornerRestore(Cube *magiccube)//µ×½Ç»¹Ô­
+void DownCornerRestore(Cube *magiccube)//åº•è§’è¿˜åŸ
 {
 	while(!((magiccube->down.s[1][1]==magiccube->down.s[2][2]&&magiccube->front.s[3][1]==magiccube->front.s[2][2]&&magiccube->left.s[3][3]==magiccube->left.s[2][2])
 		&&(magiccube->down.s[1][3]==magiccube->down.s[2][2]&&magiccube->front.s[3][3]==magiccube->front.s[2][2]&&magiccube->right.s[3][1]==magiccube->right.s[2][2])
 		&&(magiccube->down.s[3][1]==magiccube->down.s[2][2]&&magiccube->right.s[3][1]==magiccube->right.s[2][2]&&magiccube->back.s[3][3]==magiccube->back.s[2][2])
-		&&(magiccube->down.s[3][3]==magiccube->down.s[2][2]&&magiccube->back.s[3][1]==magiccube->back.s[2][2]&&magiccube->right.s[3][3]==magiccube->right.s[2][2])))//Ö±µ½µ×½ÇÈ«²¿¹éÎ»
+		&&(magiccube->down.s[3][3]==magiccube->down.s[2][2]&&magiccube->back.s[3][1]==magiccube->back.s[2][2]&&magiccube->right.s[3][3]==magiccube->right.s[2][2])))//ç›´åˆ°åº•è§’å…¨éƒ¨å½’ä½
 	{
 		Surface *sur[4]={&magiccube->front,&magiccube->left,&magiccube->back,&magiccube->right};
 		char *s[4]={"f","l","b","r"};
@@ -464,7 +460,7 @@ void DownCornerRestore(Cube *magiccube)//µ×½Ç»¹Ô­
 				MoveCube(magiccube,ch,1);
 				MoveCube(magiccube,"u",1);
 				MoveCube(magiccube,ch,3);
-			}//µ×Ãæ½Ç¿éÑÕÉ«¹éÎ»µ«ÊÇÎ»ÖÃ²»¶Ô
+			}//åº•é¢è§’å—é¢œè‰²å½’ä½ä½†æ˜¯ä½ç½®ä¸å¯¹
 			if(magiccube->up.s[subscript_of_up[i][0]][subscript_of_up[i][1]]==magiccube->down.s[2][2])
 			{
 				n=0;
@@ -478,8 +474,8 @@ void DownCornerRestore(Cube *magiccube)//µ×½Ç»¹Ô­
 				MoveCube(magiccube,"u",3);
 				MoveCube(magiccube,ch,3);
 				MoveCube(magiccube,"u",2);
-			}//¶¥ÃæÓĞµ×½ÇÉ«¿éµÄÇé¿ö
-			if(sur[i]->s[1][1]==magiccube->down.s[2][2])//²àÃæ×óÉÏ½ÇÊÇµ×ÃæÉ«µÄÇé¿ö
+			}//é¡¶é¢æœ‰åº•è§’è‰²å—çš„æƒ…å†µ
+			if(sur[i]->s[1][1]==magiccube->down.s[2][2])//ä¾§é¢å·¦ä¸Šè§’æ˜¯åº•é¢è‰²çš„æƒ…å†µ
 			{
 				n=0;
 				while(sur[(i+n+1)%4]->s[2][2]!=sur[(i+n+1)%4]->s[1][3])
@@ -492,7 +488,7 @@ void DownCornerRestore(Cube *magiccube)//µ×½Ç»¹Ô­
 				MoveCube(magiccube,"u",1);
 				MoveCube(magiccube,ch,3);
 			}
-			if(sur[i]->s[1][3]==magiccube->down.s[2][2])//²àÃæÓÒÉÏ½ÇÊÇµ×ÃæÉ«µÄÇé¿ö
+			if(sur[i]->s[1][3]==magiccube->down.s[2][2])//ä¾§é¢å³ä¸Šè§’æ˜¯åº•é¢è‰²çš„æƒ…å†µ
 			{
 				n=0;
 				while(sur[(i+n+3)%4]->s[2][2]!=sur[(i+n+3)%4]->s[1][1])
@@ -505,25 +501,25 @@ void DownCornerRestore(Cube *magiccube)//µ×½Ç»¹Ô­
 				MoveCube(magiccube,"u",3);
 				MoveCube(magiccube,ch,1);
 			}
-			if(sur[i]->s[3][1]==magiccube->down.s[2][2])//²àÃæ×óÏÂ½ÇÊÇµ×ÃæÉ«µÄÇé¿ö
+			if(sur[i]->s[3][1]==magiccube->down.s[2][2])//ä¾§é¢å·¦ä¸‹è§’æ˜¯åº•é¢è‰²çš„æƒ…å†µ
 			{
 				strcpy(ch,s[i]);
 				MoveCube(magiccube,ch,1);
 				MoveCube(magiccube,"u",1);
 				MoveCube(magiccube,ch,3);
 			}
-			if(sur[i]->s[3][3]==magiccube->down.s[2][2])//²àÃæÓÒÏÂ½ÇÊÇµ×ÃæÉ«µÄÇé¿ö
+			if(sur[i]->s[3][3]==magiccube->down.s[2][2])//ä¾§é¢å³ä¸‹è§’æ˜¯åº•é¢è‰²çš„æƒ…å†µ
 			{
 				strcpy(ch,s[i]);
 				MoveCube(magiccube,ch,3);
 				MoveCube(magiccube,"u",3);
 				MoveCube(magiccube,ch,1);
-			}//²àÃæÓĞµ×ÃæÉ«¿é
+			}//ä¾§é¢æœ‰åº•é¢è‰²å—
 		}
 	}
 }
 
-void CentreEdgeRestore(Cube *magiccube)//ÖĞÀâ¹éÎ»
+void CentreEdgeRestore(Cube *magiccube)//ä¸­æ£±å½’ä½
 {
 	while(!((magiccube->front.s[2][1]==magiccube->front.s[2][2]&&magiccube->front.s[2][3]==magiccube->front.s[2][2])
 		&&(magiccube->left.s[2][1]==magiccube->left.s[2][2]&&magiccube->left.s[2][3]==magiccube->left.s[2][2])
@@ -592,7 +588,7 @@ void CentreEdgeRestore(Cube *magiccube)//ÖĞÀâ¹éÎ»
 	}
 }
 
-void UpCross(Cube *magiccube)//¶¥ÃæÊ®×Ö
+void UpCross(Cube *magiccube)//é¡¶é¢åå­—
 {
 	while(!(magiccube->up.s[1][2]==magiccube->up.s[2][2]&&magiccube->up.s[2][1]==magiccube->up.s[2][2]
 		&&magiccube->up.s[2][3]==magiccube->up.s[2][2]&&magiccube->up.s[3][2]==magiccube->up.s[2][2]))
@@ -617,7 +613,7 @@ void UpCross(Cube *magiccube)//¶¥ÃæÊ®×Ö
 				&&magiccube->up.s[subscript_of_up[(i+2)%4][0]][subscript_of_up[(i+2)%4][1]]==magiccube->up.s[2][2]
 				&&magiccube->up.s[subscript_of_up[i][0]][subscript_of_up[i][1]]!=magiccube->up.s[2][2]
 				&&magiccube->up.s[subscript_of_up[(i+3)%4][0]][subscript_of_up[(i+3)%4][1]]!=magiccube->up.s[2][2])
-			{//ĞÎ³ÉÒ»¸öµ¹"L"
+			{//å½¢æˆä¸€ä¸ªå€’"L"
 				strcpy(ch,s[i]);
 				MoveCube(magiccube,ch,1);
 				strcpy(ch,s[(i+3)%4]);
@@ -632,7 +628,7 @@ void UpCross(Cube *magiccube)//¶¥ÃæÊ®×Ö
 				&&magiccube->up.s[subscript_of_up[(i+3)%4][0]][subscript_of_up[(i+3)%4][1]]==magiccube->up.s[2][2]
 				&&magiccube->up.s[subscript_of_up[i][0]][subscript_of_up[i][1]]!=magiccube->up.s[2][2]
 				&&magiccube->up.s[subscript_of_up[(i+2)%4][0]][subscript_of_up[(i+2)%4][1]]!=magiccube->up.s[2][2])
-			{//ĞÎ³ÉÒ»¸öºá"Ò»"
+			{//å½¢æˆä¸€ä¸ªæ¨ª"ä¸€"
 				strcpy(ch,s[i]);
 				MoveCube(magiccube,ch,1);
 				strcpy(ch,s[(i+3)%4]);
@@ -647,7 +643,7 @@ void UpCross(Cube *magiccube)//¶¥ÃæÊ®×Ö
 	}
 }
 
-void UpSurfaceCornerRestore(Cube *magiccube)//¶¥½ÇÃæÎ»
+void UpSurfaceCornerRestore(Cube *magiccube)//é¡¶è§’é¢ä½
 {
 	while(!(magiccube->up.s[1][1]==magiccube->up.s[2][2]&&magiccube->up.s[1][3]==magiccube->up.s[2][2]
 		&&magiccube->up.s[3][1]==magiccube->up.s[2][2]&&magiccube->up.s[3][3]==magiccube->up.s[2][2]))
@@ -662,7 +658,7 @@ void UpSurfaceCornerRestore(Cube *magiccube)//¶¥½ÇÃæÎ»
 			if((magiccube->up.s[1][1]!=magiccube->up.s[2][2]&&magiccube->up.s[1][3]!=magiccube->up.s[2][2]
 				&&magiccube->up.s[3][1]!=magiccube->up.s[2][2]&&magiccube->up.s[3][3]!=magiccube->up.s[2][2])
 				&&(sur[i]->s[1][1]==magiccube->up.s[2][2]&&sur[i]->s[1][3]==magiccube->up.s[2][2]))
-			{//Ê®×ÖĞÍ£¨Ç°×óÓÒÓëÉÏÍ¬É«£©
+			{//åå­—å‹ï¼ˆå‰å·¦å³ä¸ä¸ŠåŒè‰²ï¼‰
 				n=0;
 				while(sur[(i+n)%4]->s[1][2]!=sur[(i+n)%4]->s[2][2])
 				{
@@ -682,8 +678,8 @@ void UpSurfaceCornerRestore(Cube *magiccube)//¶¥½ÇÃæÎ»
 				&&magiccube->up.s[subscript_of_up[i][0]][subscript_of_up[i][1]]!=magiccube->up.s[2][2]
 				&&magiccube->up.s[subscript_of_up[(i+1)%4][0]][subscript_of_up[(i+1)%4][1]]!=magiccube->up.s[2][2]
 				&&magiccube->up.s[subscript_of_up[(i+2)%4][0]][subscript_of_up[(i+2)%4][1]]!=magiccube->up.s[2][2])
-			{//ÓãÍ·³¯ÓÒÏÂµÄÓã
-				if(sur[i]->s[1][1]!=magiccube->up.s[2][2])//Ç°×óÓëÉÏÒìÉ«
+			{//é±¼å¤´æœå³ä¸‹çš„é±¼
+				if(sur[i]->s[1][1]!=magiccube->up.s[2][2])//å‰å·¦ä¸ä¸Šå¼‚è‰²
 				{
 					strcpy(ch,s[(i+3)%4]);
 					MoveCube(magiccube,ch,3);
@@ -694,7 +690,7 @@ void UpSurfaceCornerRestore(Cube *magiccube)//¶¥½ÇÃæÎ»
 					MoveCube(magiccube,"u",1);
 					MoveCube(magiccube,ch,1);
 				}
-				else//Ç°×óÓëÉÏÍ¬É«
+				else//å‰å·¦ä¸ä¸ŠåŒè‰²
 				{
 					MoveCube(magiccube,"u",3);
 					strcpy(ch,s[(i+3)%4]);
@@ -711,9 +707,9 @@ void UpSurfaceCornerRestore(Cube *magiccube)//¶¥½ÇÃæÎ»
 				&&magiccube->up.s[subscript_of_up[i][0]][subscript_of_up[i][1]]!=magiccube->up.s[2][2]
 				&&magiccube->up.s[subscript_of_up[(i+3)%4][0]][subscript_of_up[(i+3)%4][1]]!=magiccube->up.s[2][2]
 				&&magiccube->up.s[subscript_of_up[(i+2)%4][0]][subscript_of_up[(i+2)%4][1]]==magiccube->up.s[2][2])
-			{//´óÅÚĞÍ
+			{//å¤§ç‚®å‹
 				if(sur[i]->s[1][1]==magiccube->up.s[2][2]&&sur[i]->s[1][3]==magiccube->up.s[2][2])
-				{//Ç°×óÓÒÓëÉÏÍ¬É«
+				{//å‰å·¦å³ä¸ä¸ŠåŒè‰²
 					strcpy(ch,s[(i+1)%4]);
 					MoveCube(magiccube,ch,3);
 					MoveCube(magiccube,"u",2);
@@ -724,7 +720,7 @@ void UpSurfaceCornerRestore(Cube *magiccube)//¶¥½ÇÃæÎ»
 					MoveCube(magiccube,ch,1);
 				}
 				else
-				{//Ç°×óÓÒÓëÉÏÒìÉ«
+				{//å‰å·¦å³ä¸ä¸Šå¼‚è‰²
 					strcpy(ch,s[(i+2)%4]);
 					MoveCube(magiccube,ch,3);
 					MoveCube(magiccube,"u",2);
@@ -739,7 +735,7 @@ void UpSurfaceCornerRestore(Cube *magiccube)//¶¥½ÇÃæÎ»
 				&&magiccube->up.s[subscript_of_up[i][0]][subscript_of_up[i][1]]!=magiccube->up.s[2][2]
 				&&magiccube->up.s[subscript_of_up[(i+1)%4][0]][subscript_of_up[(i+1)%4][1]]==magiccube->up.s[2][2]
 				&&magiccube->up.s[subscript_of_up[(i+2)%4][0]][subscript_of_up[(i+2)%4][1]]!=magiccube->up.s[2][2])
-			{//Ë«ÁèĞÍ
+			{//åŒå‡Œå‹
 				MoveCube(magiccube,"u",3);
 				strcpy(ch,s[(i+3)%4]);
 				MoveCube(magiccube,ch,3);
@@ -754,7 +750,7 @@ void UpSurfaceCornerRestore(Cube *magiccube)//¶¥½ÇÃæÎ»
 	}
 }
 
-void UpCornerRestore(Cube *magiccube)//¶¥½Ç»¹Ô­
+void UpCornerRestore(Cube *magiccube)//é¡¶è§’è¿˜åŸ
 {
 	while(magiccube->front.s[1][1]!=magiccube->front.s[2][2])
 		MoveCube(magiccube,"u",1);
@@ -804,7 +800,7 @@ void UpCornerRestore(Cube *magiccube)//¶¥½Ç»¹Ô­
 	}
 }
 
-void UpEdgeRestore(Cube *magiccube)//¶¥Àâ»¹Ô­
+void UpEdgeRestore(Cube *magiccube)//é¡¶æ£±è¿˜åŸ
 {
 	while(magiccube->front.s[1][1]!=magiccube->front.s[2][2])
 		MoveCube(magiccube,"u",1);
@@ -846,7 +842,7 @@ void UpEdgeRestore(Cube *magiccube)//¶¥Àâ»¹Ô­
 	}
 }
 
-void printsurface(Surface sur)//Êä³öÄ³Ò»ÃæµÄÑÕÉ«
+void printsurface(Surface sur)//è¾“å‡ºæŸä¸€é¢çš„é¢œè‰²
 {
 	int i,j;
 	for(i=1;i<=3;i++)
@@ -888,10 +884,10 @@ void PrintBuf()
 			i=0;
 		}
 	}
-	printf("\n\n±¾´ÎÄ§·½×ª»»Ò»¹²½øĞĞÁË%d²½!\n",CD.num);
+	printf("\n\næœ¬æ¬¡é­”æ–¹è½¬æ¢ä¸€å…±è¿›è¡Œäº†%dæ­¥!\n",CD.num);
 }
 
-void InitializationMagiccube(Cube *m)//³õÊ¼»¯Ä§·½
+void InitializationMagiccube(Cube *m)//åˆå§‹åŒ–é­”æ–¹
 {
 	
 
@@ -926,30 +922,30 @@ void Exit()
 	for(p=CD.head;p;p=q)
 	{
 		q=p->next;
-		free(p->chbuf);free(p);//ÊÍ·ÅËùÓĞÄÚ´æ¿Õ¼ä
+		free(p->chbuf);free(p);//é‡Šæ”¾æ‰€æœ‰å†…å­˜ç©ºé—´
 	}
 	printf("Press any key to exit...");
 	getch();
 }
 
-//Ö÷º¯Êı£º
+//ä¸»å‡½æ•°ï¼š
  main()
 {
 	Cube magiccube;
 	int i=0;
 	CD.num=0;
 	CD.head=NULL;
-	Input(&magiccube);//ÊäÈëÄ§·½³õÊ¼×´Ì¬
-	//InitializationMagiccube(&magiccube);//³õÊ¼»¯Ä§·½
-	DownCross(&magiccube);//µ×²¿Ê®×Ö	
-	DownCornerRestore(&magiccube);//µ×½Ç»¹Ô­
-	CentreEdgeRestore(&magiccube);//ÖĞÀâ»¹Ô­
-	UpCross(&magiccube);//¶¥ÃæÊ®×Ö
-	UpSurfaceCornerRestore(&magiccube);//¶¥½ÇÃæÎ»
-	UpCornerRestore(&magiccube);//¶¥½Ç»¹Ô­
-	UpEdgeRestore(&magiccube);//¶¥Àâ»¹Ô­
-	PrintMagicCube(magiccube);//Êä³ö±ä»»ºóµÄÄ§·½
-	PrintBuf();//Êä³ö±ä¸üĞòÁĞ
+	Input(&magiccube);//è¾“å…¥é­”æ–¹åˆå§‹çŠ¶æ€
+	//InitializationMagiccube(&magiccube);//åˆå§‹åŒ–é­”æ–¹
+	DownCross(&magiccube);//åº•éƒ¨åå­—	
+	DownCornerRestore(&magiccube);//åº•è§’è¿˜åŸ
+	CentreEdgeRestore(&magiccube);//ä¸­æ£±è¿˜åŸ
+	UpCross(&magiccube);//é¡¶é¢åå­—
+	UpSurfaceCornerRestore(&magiccube);//é¡¶è§’é¢ä½
+	UpCornerRestore(&magiccube);//é¡¶è§’è¿˜åŸ
+	UpEdgeRestore(&magiccube);//é¡¶æ£±è¿˜åŸ
+	PrintMagicCube(magiccube);//è¾“å‡ºå˜æ¢åçš„é­”æ–¹
+	PrintBuf();//è¾“å‡ºå˜æ›´åºåˆ—
 	Exit();
 	return 0;
 }
